@@ -49,7 +49,8 @@ dbLoadRecords("$(ADCORE)/ADApp/Db/NDStdArrays.template", "P=$(PREFIX),R=Trace1:,
 
 
 ## Load all other plugins using commonPlugins.cmd
-< $(ADCORE)/iocBoot/commonPlugins.cmd
+#< $(ADCORE)/iocBoot/commonPlugins.cmd
+< $(TOP)/iocBoot/$(IOC)/commonPlugins.cmd
 
 set_requestfile_path("$(TLCCS)/tlccsApp/Db")
 set_requestfile_path("$(ADFILEASCII)/adfileasciiApp/Db")
