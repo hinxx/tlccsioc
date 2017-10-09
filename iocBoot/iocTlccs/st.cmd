@@ -15,6 +15,8 @@ epicsEnvSet("QSIZE",  "20")
 epicsEnvSet("XSIZE",  "3648")
 epicsEnvSet("YSIZE",  "1")
 epicsEnvSet("NCHANS", "2048")
+epicsEnvSet("MAX_THREADS", "8")
+epicsEnvSet("CBUFFS", "500")
 # The search path for database files
 epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
 
@@ -40,8 +42,8 @@ tlCCSConfig("$(PORT)", 0, 0, "$(RSCSTR)", 0, 100000)
 dbLoadRecords("$(ADTLCCS)/tlccsApp/Db/tlccs.template",  "P=$(PREFIX),R=$(CAM),PORT=$(PORT),ADDR=0,TIMEOUT=1,NELEMENTS=$(XSIZE)")
 
 # Create ASCII file saving plugin
-NDFileAsciiConfigure("Ascii1", $(QSIZE), 0, "$(PORT)", 0)
-dbLoadRecords("$(ADMISC)/db/NDFileAscii.template", "P=$(PREFIX),R=Ascii1:,PORT=Ascii1,ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(PORT),NDARRAY_ADDR=0")
+#NDFileAsciiConfigure("Ascii1", $(QSIZE), 0, "$(PORT)", 0)
+#dbLoadRecords("$(ADMISC)/db/NDFileAscii.template", "P=$(PREFIX),R=Ascii1:,PORT=Ascii1,ADDR=0,TIMEOUT=1,NDARRAY_PORT=$(PORT),NDARRAY_ADDR=0")
 
 # Create standard arrays plugin for a trace
 NDStdArraysConfigure("TRACE1", 5, 0, "$(PORT)", 0, 0)
@@ -52,8 +54,8 @@ dbLoadRecords("$(ADCORE)/ADApp/Db/NDStdArrays.template", "P=$(PREFIX),R=Trace1:,
 #< $(ADCORE)/iocBoot/commonPlugins.cmd
 < $(TOP)/iocBoot/$(IOC)/commonPlugins.cmd
 
-set_requestfile_path("$(TLCCS)/tlccsApp/Db")
-set_requestfile_path("$(ADFILEASCII)/adfileasciiApp/Db")
+set_requestfile_path("$(ADTLCCS)/tlccsApp/Db")
+#set_requestfile_path("$(ADFILEASCII)/adfileasciiApp/Db")
 
 #asynSetTraceIOMask("$(PORT)",0,2)
 #asynSetTraceMask("$(PORT)",0,255)
